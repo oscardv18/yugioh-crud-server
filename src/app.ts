@@ -13,6 +13,7 @@ app.get("/", (req: Request, res: Response) => {
     });
 });
 
+
 const startServer = async () => {
     if (typeof process.env.MONGODB_URL === 'string')  {
         dbConnection(process.env.MONGODB_URL)
