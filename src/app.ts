@@ -1,15 +1,40 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import dbConnection from "./db/db";
+import BuyedC from "./db/models/buyed_card";
 
 dotenv.config();
 
 const app: Express = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send({
-    message: "Hello World!",
-  });
+app.get("/buy", (req: Request, res: Response) => {
+  try {
+    const newCardBuy = new BuyedC({
+      users_buyers: [
+        {
+          userId: "pqoweiur12",
+          username: "oscardv18",
+        },
+      ],
+      card_id: 13242134,
+    });
+
+    const cardbuyedSaved = newCardBuy
+      .save()
+      .then((coll) => {
+        console.log("Collection created successfully! ", coll);
+      })
+      .catch((error) => {
+        console.error("Error al crear la collection:", error);
+      });
+    res.json(cardbuyedSaved);
+  } catch (err) {
+    res.status(500).json({ err: "Error al crea collection" });
+  }
+
+  // res.send({
+  //   message: "Hello World!",
+  // });
 });
 
 const startServer = async () => {
@@ -19,6 +44,7 @@ const startServer = async () => {
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log("🌩️[Server] Server is running! http://localhost:8000");
+    console.log("[MongoDB Express] Mongo UI is running http://localhost:8081");
   });
 };
 

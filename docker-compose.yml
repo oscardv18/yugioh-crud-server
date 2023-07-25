@@ -23,6 +23,16 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - mongo-data:/data/db
+  mongoex:
+    image: mongo-express
+    ports:
+        - "8081:8081"
+    networks:
+      - backend
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=oscar
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongoose
 
 volumes:
   mongo-data:
