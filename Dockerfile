@@ -1,4 +1,4 @@
-FROM node:18.16.1-bullseye
+FROM node:lts-hydrogen
 
 RUN npm i -g nodemon
 

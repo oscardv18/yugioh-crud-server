@@ -19,15 +19,16 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.get("/", (req, res) => {
     res.send({
-        message: 'Hello World!',
+        message: "Hello World!",
     });
 });
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    if (typeof process.env.MONGODB_URL === 'string') {
+    if (typeof process.env.MONGODB_URL === "string") {
         (0, db_1.default)(process.env.MONGODB_URL);
     }
     app.listen(process.env.SERVER_PORT, () => {
-        console.log('🌩️[Server] Server is running! http://localhost:8000');
+        console.log("🌩️[Server] Server is running! http://localhost:8000");
+        console.log("[MongoDB Express] Mongo UI is running http://localhost:8081");
     });
 });
 startServer();
