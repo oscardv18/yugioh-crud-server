@@ -15,13 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./db/db"));
+const cardsDeck_1 = __importDefault(require("./routes/api/v1/cardsDeck"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.get("/", (req, res) => {
-    res.send({
-        message: "Hello World!",
-    });
-});
+app.use("/api/v1/cards", cardsDeck_1.default);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     if (typeof process.env.MONGODB_URL === "string") {
         (0, db_1.default)(process.env.MONGODB_URL);
